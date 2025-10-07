@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - EAuthz</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f5e6fa 100%); /* Smooth blue-to-purple gradient */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            margin: 0;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95); /* Subtle white background with opacity */
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+            padding: 3rem;
+            max-width: 450px;
+            width: 100%;
+            animation: fadeIn 0.5s ease-out; /* Smooth fade-in animation */
+            text-align: center; /* Center all text within the card */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-floating {
+            margin-bottom: 1.5rem;
+            width: 100%; /* Full-width inputs */
+        }
+
+        .form-floating input {
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+            background-color: #f8f9fa; /* Light gray input background */
+        }
+
+        .form-floating input:focus {
+            border-color: #663399; /* Purple focus border */
+            box-shadow: 0 0 0 3px rgba(102, 51, 153, 0.1); /* Purple focus ring */
+        }
+
+        .btn-primary {
+            background-color: #663399; /* Base purple button */
+            border-color: #663399;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            width: 80%; /* Slightly narrower button */
+            margin: 0 auto; /* Center the button */
+            display: block; /* Ensure block element for centering */
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02); /* Slight scale-up on hover */
+            background-color: #7a42f3; /* Darker purple on hover */
+        }
+
+        .divider-text {
+            margin-top: 2rem;
+            color: #663399; /* Purple divider text */
+            font-size: 0.9rem;
+        }
+
+        .divider-text a {
+            color: #663399;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .divider-text a:hover {
+            color: #7a42f3; /* Darker purple on link hover */
+            text-decoration: underline;
+        }
+
+        /* Optional: Add a small logo/avatar placeholder */
+        .app-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            background-color: #e3f2fd; /* Blue tint */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Registration Card -->
+    <div class="login-card">
+        <!-- App Logo/Brand -->
+        <div class="app-logo mb-3">
+            EA <!-- Simple logo initial for EAuthz -->
+        </div>
+        <h2 class="mb-4 text-center">
+            <strong>Register with EAuthz</strong>
+        </h2>
+        <p class="text-muted small">Create an account to access secure features and personalize your experience.</p> <!-- Centered, muted text -->
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show mb-4" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Registration Form -->
+        <form method="POST">
+            <!-- Username Input -->
+            <div class="form-floating">
+                <input type="text" class="form-control" id="username" name="username" required>
+                <label for="username">Username</label>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password" name="password" required>
+                <label for="password">Password</label>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="form-floating">
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                <label for="confirm_password">Confirm Password</label>
+            </div>
+
+            <!-- Register Button -->
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        <!-- Divider Text (Centered) -->
+        <div class="divider-text">
+            Already have an account? 
+            <a href="{{ url_for('login') }}">
+                Login here
+            </a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS for alerts and navbar -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
